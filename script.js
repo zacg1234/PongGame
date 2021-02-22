@@ -24,6 +24,8 @@ BOTPADDLEOBJ.style.left = botPaddleX;
 // 5 still loses sometimes (but really the half of the botPaddleSpeed)
 var botPaddleSpeed = 2.5;
 
+var playerPaddleSpeed = 6;
+
 // hypotenuse 
 var initSpeed= 3.5;
 
@@ -41,20 +43,57 @@ var ballYPosition = Math.abs(70 * playAreaHeightPercent);
 // the interval timer that moves the ball
 var myIntervalTimer;
 
-BALLOBJ.addEventListener("click", startBall);
+var playerPaddleMovementTimer;
 
-function moveThePaddle(event){
-    mouseX = event.clientX;
-    playerPaddleX = mouseX - (40 * playAreaWidthPercent);
-    if(playerPaddleX > (0) && playerPaddleX < (playAreaWidthPercent * 83)){
-        PLAYERPADDLEOBJ.style.left = playerPaddleX;
+// was an arrow key pressed
+var pressed = false;
+
+// has the game reset
+var gameReset = true;
+
+BALLOBJ.addEventListener("click", startBall);
+window.addEventListener("keydown", startMovement);
+window.addEventListener("keyup", stopMovement);
+
+        // starts the game and handles player paddel movement 
+function startMovement(event){
+    if(event.code === "Space" && gameReset == true){
+        startBall();
+        gameReset = false;
     }
-};
+
+    if (!event.repeat && playerPaddleMovementTimer == 0) {
+        if(pressed == true){
+            clearInterval(playerPaddleMovementTimer);
+        }  
+            // Move the playerPaddle right
+        if(event.code === "KeyD" || event.code === "ArrowRight" && gameReset == false){
+            playerPaddleMovementTimer = setInterval(function(){
+                playerPaddleX = playerPaddleX + playerPaddleSpeed;
+                PLAYERPADDLEOBJ.style.left = playerPaddleX;
+                if (playerPaddleX > (playAreaWidthPercent * 82.5)){clearInterval(playerPaddleMovementTimer);}
+            }, 10)
+        }
+                // Move the playerPaddle left
+        if(event.code === "KeyA" || event.code === "ArrowLeft" && gameReset == false){
+            playerPaddleMovementTimer = setInterval(function(){
+                playerPaddleX = playerPaddleX - playerPaddleSpeed;
+                PLAYERPADDLEOBJ.style.left = playerPaddleX;
+                if (playerPaddleX < (playAreaWidthPercent * 1.4)){clearInterval(playerPaddleMovementTimer);}
+            }, 10)
+        }
+        pressed = true;
+    };
+}
+
+function stopMovement(event){
+    clearInterval(playerPaddleMovementTimer); 
+    playerPaddleMovementTimer = 0; 
+    pressed = false;
+}
 
 function startBall(){
     PlAYAREAOBJ.style.cursor = "none";
-    PlAYAREAOBJ.addEventListener("mousemove", moveThePaddle);
-    console.log("hello");
     myIntervalTimer = setInterval(startBallMovement, 10);
 };
 
@@ -69,11 +108,11 @@ function bounceTheBall(){
             // right edge of paddle
     && ballXPosition < playerPaddleX + (playAreaWidthPercent * 17)){
                 // left edge boost
-        if(ballXPosition < playerPaddleX + (playAreaWidthPercent * 4.5 && deltaX > - 6)){
+        if(ballXPosition < playerPaddleX + (playAreaWidthPercent * 6 && deltaX > - 6)){
             deltaX = deltaX - 1;
         };
                 // right edge boost
-        if(ballXPosition > playerPaddleX + (playAreaWidthPercent * 11) && deltaX < 6){
+        if(ballXPosition > playerPaddleX + (playAreaWidthPercent * 9.5) && deltaX < 6){
             deltaX = deltaX + 1;
         };
         deltaY = -deltaY;
@@ -87,9 +126,7 @@ function bounceTheBall(){
     && ballXPosition > (botPaddleX - (playAreaWidthPercent * 1.5)) 
             // right edge of paddle
     && ballXPosition < botPaddleX + (playAreaWidthPercent * 17)){
-
         deltaY = -deltaY;
-
     };
 
     //when ball touches sides
@@ -130,18 +167,23 @@ function startBallMovement(){
 
 
 function resetTheGame(){
-    clearInterval(myIntervalTimer);
+    gameReset = true;
+        // reset the ball
     ballXPosition = Math.abs(49 * playAreaWidthPercent);
     ballYPosition = Math.abs(70 * playAreaHeightPercent);
     BALLOBJ.style.bottom = ballYPosition;
     BALLOBJ.style.left = ballXPosition;
-                 // just for testing
-            console.log("game over");
+        // reset the player paddle
+    var playerPaddleX = (42 * playAreaWidthPercent); 
+    PLAYERPADDLEOBJ.style.left = playerPaddleX;
+        // reset the bot paddle
+    var botPaddleX = (42 * playAreaWidthPercent);
+    BOTPADDLEOBJ.style.left = botPaddleX;
     PlAYAREAOBJ.style.cursor = "auto";
+    clearInterval(myIntervalTimer);
 }
 
 function moveBotPaddle(){
-
 //doubles the speed
     for(let i = 0; i < 2; i++ ){
         //if the ball is to the right of the paddle

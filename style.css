@@ -13,6 +13,7 @@ HTML{
     background-color: rgb(64, 69, 62);
     box-shadow: 0px 0px 20px 1px rgb(195, 235, 190);
     border-radius: 2%; 
+    overflow: hidden;
 }
 
 #bot-paddle{
