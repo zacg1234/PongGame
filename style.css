@@ -5,13 +5,19 @@
 HTML{
     background-color: black;
 }
+@font-face {
+    font-family: 'Arcade';
+    src: url(./Press_Start_2P/PressStart2P-Regular.ttf);
+  }
+  
 
 #play-area{
     transform: translate(32.5%, 8.5%);
     height: 85%;
     width: 60%;
-    background-color: rgb(64, 69, 62);
-    box-shadow: 0px 0px 20px 1px rgb(195, 235, 190);
+    border: 2px solid black;
+    background-color: rgb(64, 69, 62); 
+    box-shadow: 0px 0px 20px 1px rgb(227, 240, 227); 
     border-radius: 2%; 
     overflow: hidden;
 }
@@ -22,7 +28,7 @@ HTML{
     bottom: 91%;
     height: 2vw;
     width: 10vw;
-    background-color: rgb(188, 203, 189);
+    background-color:rgb(188, 203, 189);
     border-radius: 3%; 
 }
 
@@ -46,10 +52,65 @@ HTML{
     border-radius: 50%; 
 }
 
+#score-board{
+    position: absolute;
+    top: 10vh;
+    left: 5vw;
+}
+#score-board div{
+    display: block;
+    background-color: rgba(62, 70, 59, 0.7);
+    text-align: center;
+    padding: 0 0.75vw 4vh 0.75vw;
+}
+.score-title{
+    color: white;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 7vh;
+    font-family: 'Arcade';
+    font-size: 1.5vw;
+}
+
+#score-board div p{
+    text-align: center;
+    vertical-align: middle;
+    color: white;
+    font-family: 'Arcade';
+    font-size: 1.5vw;
+}
+
+#health{
+    position: absolute;
+    top: 75vh;
+    left: 85vw;
+}
+
+#lives{
+    text-align: center;
+    vertical-align: middle;
+    color: white;
+    font-family: 'Arcade';
+    font-size: 1.5vw;
+}
+
+#message{
+    position: absolute;
+    top: 40vh;
+    left: 10vw;
+    z-index: 3;
+    text-align: center;
+    vertical-align: middle;
+    color: rgb(150, 5, 5);
+    text-shadow: 2px 2px 6px rgb(150, 123, 123);
+    font-family: 'Arcade';
+    font-size: 4vw;
+}
+
 #marker{
     position: absolute;
-    left: 300px;
-    bottom: 300px;
+    left: 0;
+    bottom: 0;
     height: 0.5vw;
     width: 0.5vw;
     background-color: red;

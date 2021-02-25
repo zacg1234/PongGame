@@ -2,24 +2,36 @@
     <link rel="stylesheet" href="./style.css">
 </head>
 <body>
-    <!-- <div id="score-board"> 
-        <div id="plyr-section"> 
+    <p id="message"> PRESS SPACE TO BEGIN </p>
+
+    <div id="health"> 
+        <p class="score-title"> LIVES </p>
+        <p id="lives"> 3 </p>
+    </div>
+
+   <div id="score-board"> 
+         <div id="comp-section">
+            <p class="score-title"> COMP </p>
+            <p id="computer-score"> 0 </p>
+        </div>
+
+        <div style="height: 47vh; background-color: transparent;"> </div>
+
+       <div id="plyr-section"> 
+            <p class="score-title"> PLYR </p>
             <p id="player-score"> 0 </p>
         </div>
-        <div id="comp-section">
-            <p id="computer-score"> 0</p>
-        </div>
-    </div> -->
+    </div>
 
     <div id="play-area">
         <div id="bot-paddle"></div>
-        
+
         <div id="ball"></div>
 
         <div id="player-paddle"></div>
         
-        <div id="marker"></div>
+        
     </div>
-
+        <div id="marker"></div>
 </body>
 <script src="./script.js"></script>
