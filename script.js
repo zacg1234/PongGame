@@ -26,7 +26,7 @@ BOTPADDLEOBJ.style.left = botPaddleX;
 
 
 // game dynamics 
-var botPaddleSpeed = 2;
+var botPaddleSpeed = 1.75;
 //2.5;
 
 var playerPaddleSpeed = 10;
@@ -40,10 +40,10 @@ var plyrScore = 0;
 var compScore = 0;
 
 // hypotenuse 
-var initSpeed = 8;
+var initSpeed = 7;
 
 //initial angle of the ball
-var initAngle = Math.floor(Math.random() * -131) - 20; 
+var initAngle = Math.floor(Math.random() * 120) + 30; 
 
 // change in X and Y of the ball to achieve proper trajectory
 var deltaY = Math.sin(Math.PI * initAngle / 180) * initSpeed;
@@ -51,7 +51,7 @@ var deltaX = Math.cos(Math.PI * initAngle / 180) * initSpeed;
 
 // curent X and Y postion of the ball 
 var ballXPosition = Math.abs(49 * playAreaWidthPercent);
-var ballYPosition = Math.abs(70 * playAreaHeightPercent);
+var ballYPosition = Math.abs(8 * playAreaHeightPercent);
 
 // the interval timer that moves the ball
 var myIntervalTimer;
@@ -70,7 +70,6 @@ var pressed = false;
 // has the game reset
 var gameReset = true;
 
-//BALLOBJ.addEventListener("click", startBall);
 
 window.addEventListener("load", setMessage)
 window.addEventListener("keydown", registerButtonPress);
@@ -130,7 +129,7 @@ function stopMovement(event){
 }
 
 function startBall(){
-    initAngle = Math.floor(Math.random() * -131) - 20;
+    initAngle = Math.floor(Math.random() * 120) + 30;
     deltaY = Math.sin(Math.PI * initAngle / 180) * initSpeed;
     deltaX = Math.cos(Math.PI * initAngle / 180) * initSpeed;
     PlAYAREAOBJ.style.cursor = "none";
@@ -156,12 +155,12 @@ function moveBotPaddle(){
             //if the ball is to the right of the paddle
             if(ballXPosition > (botPaddleX + (8 * playAreaWidthPercent)) 
             && botPaddleX < (83 * playAreaWidthPercent)){
-                botPaddleX = botPaddleX + botPaddleSpeed + (Math.floor(Math.random() * 2) - 1);
+                botPaddleX = botPaddleX + botPaddleSpeed + (Math.floor(Math.random() * 3) - 1.5);
             };
             //if the ball is to the left of the paddle
             if(ballXPosition < (botPaddleX + (8 * playAreaWidthPercent)) 
             && botPaddleX > (0.5 * playAreaWidthPercent)){
-                botPaddleX = botPaddleX - botPaddleSpeed + (Math.floor(Math.random() * 2) - 1);
+                botPaddleX = botPaddleX - botPaddleSpeed + (Math.floor(Math.random() * 3) - 1.5);
             };
             BOTPADDLEOBJ.style.left = botPaddleX;
         }
@@ -175,7 +174,7 @@ function bounceTheBall(){
     && ballXPosition > (playerPaddleX - (playAreaWidthPercent * 2))  // left edge of paddle
     && ballXPosition < playerPaddleX + (playAreaWidthPercent * 18)){ // right edge of paddle
                 // left edge boost
-        if(ballXPosition < playerPaddleX + (playAreaWidthPercent * 7.9) && deltaX > -6){
+        if(ballXPosition < playerPaddleX + (playAreaWidthPercent * 7.9) && deltaX > -7){
             if(deltaX > 0 && ballXPosition < playerPaddleX + (playAreaWidthPercent * 4)){
                 deltaX = - deltaX
                 deltaX = deltaX + 2
@@ -183,7 +182,7 @@ function bounceTheBall(){
             deltaX = deltaX - 2;
         };
                 // right edge boost
-        if(ballXPosition > playerPaddleX + (playAreaWidthPercent * 8) && deltaX < 6){
+        if(ballXPosition > playerPaddleX + (playAreaWidthPercent * 8) && deltaX < 7){
             if(deltaX < 0 && ballXPosition > playerPaddleX + (playAreaWidthPercent * 12)){
                 deltaX = - deltaX
                 deltaX = deltaX - 2
@@ -226,7 +225,7 @@ function resetTheGame(winner){
     gameReset = true;
         // reset the ball
     ballXPosition = Math.abs(49 * playAreaWidthPercent);
-    ballYPosition = Math.abs(70 * playAreaHeightPercent);
+    ballYPosition = Math.abs(8 * playAreaHeightPercent);
     BALLOBJ.style.bottom = ballYPosition;
     BALLOBJ.style.left = ballXPosition;
         // reset the player paddle
@@ -291,7 +290,7 @@ function changeColors(){
             BOTPADDLEOBJ.style.backgroundColor = "rgb(189, 188, 203)"
             BALLOBJ.style.backgroundColor = "rgb(189, 188, 203)"
             initSpeed = initSpeed + 1;
-            botPaddleSpeed = botPaddleSpeed + 0.75;
+            //botPaddleSpeed = botPaddleSpeed + 0.75;
         break;
         case 3:
             PlAYAREAOBJ.style.backgroundColor = "rgb(4, 12, 1)"
@@ -309,7 +308,7 @@ function changeColors(){
             BOTPADDLEOBJ.style.backgroundColor = "rgb(166, 197, 237)"
             BALLOBJ.style.backgroundColor = "rgb(166, 197, 237)"
             initSpeed = initSpeed + 1;
-            botPaddleSpeed = botPaddleSpeed + 0.75;
+            //botPaddleSpeed = botPaddleSpeed + 0.75;
             level = 1;
         break;
     }
