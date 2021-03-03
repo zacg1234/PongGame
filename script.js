@@ -27,7 +27,7 @@ BOTPADDLEOBJ.style.left = botPaddleX;
 
 // game dynamics 
 var botPaddleSpeed = 1.75;
-//2.5;
+
 
 var playerPaddleSpeed = 10;
 
@@ -39,7 +39,7 @@ var plyrScore = 0;
 
 var compScore = 0;
 
-// hypotenuse 
+// hypotenuse (+1)
 var initSpeed = 7;
 
 //initial angle of the ball
@@ -193,7 +193,7 @@ function bounceTheBall(){
     };
     //when the ball hits the bots's paddle
             // top of paddle
-    if(ballYPosition <  (89 * playAreaHeightPercent) 
+    if(ballYPosition <  (90 * playAreaHeightPercent) 
     && ballYPosition > (88 * playAreaHeightPercent)
             // left edge of paddle
     && ballXPosition > (botPaddleX - (playAreaWidthPercent * 1.5)) 
@@ -273,6 +273,8 @@ function changeColors(){
             PLAYERPADDLEOBJ.style.backgroundColor = "rgb(188, 203, 189)"
             BOTPADDLEOBJ.style.backgroundColor = "rgb(188, 203, 189)"
             BALLOBJ.style.backgroundColor = "rgb(188, 203, 189)"
+            initSpeed = initSpeed + 1;
+            //botPaddleSpeed = botPaddleSpeed + 0.75;
         break;
         case 1:
             PlAYAREAOBJ.style.backgroundColor = "rgb(69, 62, 62)"
@@ -281,7 +283,7 @@ function changeColors(){
             BOTPADDLEOBJ.style.backgroundColor = "rgb(203, 188, 188)"
             BALLOBJ.style.backgroundColor = "rgb(203, 188, 188)"
             initSpeed = initSpeed + 1;
-            botPaddleSpeed = botPaddleSpeed + 0.75;
+            //botPaddleSpeed = botPaddleSpeed + 0.75;
         break;
         case 2:
             PlAYAREAOBJ.style.backgroundColor = "rgb(62, 62, 69)"
@@ -290,7 +292,7 @@ function changeColors(){
             BOTPADDLEOBJ.style.backgroundColor = "rgb(189, 188, 203)"
             BALLOBJ.style.backgroundColor = "rgb(189, 188, 203)"
             initSpeed = initSpeed + 1;
-            //botPaddleSpeed = botPaddleSpeed + 0.75;
+            botPaddleSpeed = botPaddleSpeed + 0.75;
         break;
         case 3:
             PlAYAREAOBJ.style.backgroundColor = "rgb(4, 12, 1)"
@@ -299,7 +301,7 @@ function changeColors(){
             BOTPADDLEOBJ.style.backgroundColor = "rgb(240, 255, 240)"
             BALLOBJ.style.backgroundColor = "rgb(240, 255, 240)"
             initSpeed = initSpeed + 1;
-            botPaddleSpeed = botPaddleSpeed + 0.75;
+            //botPaddleSpeed = botPaddleSpeed + 0.75;
         break;
         case 4:
             PlAYAREAOBJ.style.backgroundColor = "rgb(249, 249, 249)"
@@ -308,8 +310,8 @@ function changeColors(){
             BOTPADDLEOBJ.style.backgroundColor = "rgb(166, 197, 237)"
             BALLOBJ.style.backgroundColor = "rgb(166, 197, 237)"
             initSpeed = initSpeed + 1;
-            //botPaddleSpeed = botPaddleSpeed + 0.75;
-            level = 1;
+            botPaddleSpeed = botPaddleSpeed + 0.75;
+            level = -1;
         break;
     }
     if(level < 4){++level;}
